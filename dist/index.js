@@ -15186,8 +15186,6 @@ const main = async () => {
   const tags = (await currentRepoGit.tags({'--sort' : 'taggerdate'})).all
 
   const version = tags.pop()
-  const repoName = github.context.payload.repository.full_name
-  const changelogUrl = `https://github.com/${repoName}/releases/tag/${version}`
   
   const slackToken = core.getInput('slack_token')
   const channelId = core.getInput('channel_id')
@@ -15197,9 +15195,17 @@ const main = async () => {
   const randomLanguage = languages[Math.floor(Math.random() * languages.length)]
   const selectedTranslation = translations[randomLanguage]
   
+  // Debug logging
+  console.log('=== Slack Notify Release Action Debug ===')
+  console.log('Version:', version)
+  console.log('Project Name:', projectName)
+  console.log('Channel ID:', channelId)
+  console.log('Selected Language:', randomLanguage)
+  console.log('Pretext:', selectedTranslation.pretext(projectName))
+  console.log('Text:', selectedTranslation.text())
+  
   const payload = JSON.stringify({
     channel: channelId,
-    token: slackToken,
     attachments: [
       {
         pretext : selectedTranslation.pretext(projectName),
@@ -15208,6 +15214,9 @@ const main = async () => {
     ],
   })
   
+  console.log('Payload being sent:', payload)
+  console.log('Payload length (bytes):', Buffer.byteLength(payload, 'utf8'))
+  
   const requestOptions = {
     method: 'POST',
     port: 443,
@@ -15215,7 +15224,7 @@ const main = async () => {
     path: '/api/chat.postMessage',
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      'Content-Length': payload.length,
+      'Content-Length': Buffer.byteLength(payload, 'utf8'),
       Authorization: `Bearer ${slackToken}`,
       Accept: 'application/json',
     },
@@ -15227,19 +15236,31 @@ const main = async () => {
       responseData += d
     })
     res.on('end', () => {
+      console.log('Response status code:', res.statusCode)
+      console.log('Response data:', responseData)
+      
       if (res.statusCode === 200) {
-        const jsonResponse = JSON.parse(responseData)
-        if (jsonResponse.ok === true) {
-          core.setOutput('status', '✅ Message sent!')
-          return
+        try {
+          const jsonResponse = JSON.parse(responseData)
+          if (jsonResponse.ok === true) {
+            console.log('Message sent successfully!')
+            core.setOutput('status', '✅ Message sent!')
+            return
+          } else {
+            console.error('Slack API returned ok=false:', jsonResponse.error)
+          }
+        } catch (e) {
+          console.error('Failed to parse JSON response:', e)
+          console.error('Raw response:', responseData)
         }
       }
       core.setFailed(`❌ Failed request: ${responseData}`)
     })
   })
 
-  messageRequest.on('error', () => {
-    core.setFailed('Failed to fetch Slack')
+  messageRequest.on('error', (err) => {
+    console.error('Request error:', err)
+    core.setFailed(`Failed to fetch Slack: ${err.message}`)
   })
 
   messageRequest.write(payload)
