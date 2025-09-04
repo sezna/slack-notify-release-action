@@ -6,23 +6,35 @@ const simpleGit = require('simple-git');
 const translations = {
   italian: {
     pretext: projectName => `Rilasciata la nuova versione di ${projectName}!`,
-    text: changelogUrl => `Changelog disponibile qua: ${changelogUrl}`
+    text: () => `✨ Le stelle scintillano sopra la blockchain! Sinergia agile raggiunta! 🚀`
   },
   russian: {
     pretext: projectName => `Выпущена новая версия ${projectName}!`,
-    text: changelogUrl => `Список изменений доступен здесь: ${changelogUrl}`
+    text: () => `🌟 Звёзды мерцают над блокчейном! Поздравляем команду с достижением синергии! 💫`
   },
   polish: {
     pretext: projectName => `Wydano nową wersję ${projectName}!`,
-    text: changelogUrl => `Lista zmian dostępna tutaj: ${changelogUrl}`
+    text: () => `⭐ Gwiazdy migoczą nad łańcuchem bloków! Gratulacje dla zespołu za zwinną synergię! 🎉`
   },
   french: {
     pretext: projectName => `Nouvelle version de ${projectName} publiée!`,
-    text: changelogUrl => `Journal des modifications disponible ici: ${changelogUrl}`
+    text: () => `✨ Les étoiles scintillent au-dessus de la blockchain! Félicitations à l'équipe pour cette synergie agile! 🌠`
   },
   spanish: {
     pretext: projectName => `¡Nueva versión de ${projectName} lanzada!`,
-    text: changelogUrl => `Registro de cambios disponible aquí: ${changelogUrl}`
+    text: () => `🌟 ¡Las estrellas brillan sobre la cadena de bloques! ¡Felicitaciones al equipo por la sinergia ágil! 🎊`
+  },
+  japanese: {
+    pretext: projectName => `${projectName}の新バージョンがリリースされました！`,
+    text: () => `✨ ブロックチェーンの上で星がきらめく！アジャイルシナジーを達成したチームにおめでとう！ 🌌`
+  },
+  swedish: {
+    pretext: projectName => `Ny version av ${projectName} släppt!`,
+    text: () => `⭐ Stjärnorna glittrar över blockkedjan! Grattis till teamet för den agila synergin! 🎯`
+  },
+  german: {
+    pretext: projectName => `Neue Version von ${projectName} veröffentlicht!`,
+    text: () => `🌟 Die Sterne funkeln über der Blockchain! Glückwunsch an das Team für die agile Synergie! 🚀`
   }
 }
 
@@ -48,7 +60,7 @@ const main = async () => {
     attachments: [
       {
         pretext : selectedTranslation.pretext(projectName),
-        text : selectedTranslation.text(changelogUrl),
+        text : selectedTranslation.text(),
       },
     ],
   })
