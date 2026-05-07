@@ -15149,35 +15149,35 @@ const simpleGit = __nccwpck_require__(9103);
 const translations = {
   italian: {
     pretext: projectName => `Rilasciata la nuova versione di ${projectName}!`,
-    text: () => `✨ Le stelle scintillano sopra la blockchain! Sinergia agile raggiunta! 🚀`
+    text: () => `✨ Una nuova classe di mercanti sorgerà come il sole all'alba! 🌅`
   },
   russian: {
     pretext: projectName => `Выпущена новая версия ${projectName}!`,
-    text: () => `🌟 Звёзды мерцают над блокчейном! Поздравляем команду с достижением синергии! 💫`
+    text: () => `✨ Новый класс торговцев взойдёт, как восходящее солнце! 🌅`
   },
   polish: {
     pretext: projectName => `Wydano nową wersję ${projectName}!`,
-    text: () => `⭐ Gwiazdy migoczą nad łańcuchem bloków! Gratulacje dla zespołu za zwinną synergię! 🎉`
+    text: () => `✨ Nowa klasa kupców powstanie jak wschodzące słońce! 🌅`
   },
   french: {
     pretext: projectName => `Nouvelle version de ${projectName} publiée!`,
-    text: () => `✨ Les étoiles scintillent au-dessus de la blockchain! Félicitations à l'équipe pour cette synergie agile! 🌠`
+    text: () => `✨ Une nouvelle classe de marchands s'élèvera comme le soleil levant! 🌅`
   },
   spanish: {
     pretext: projectName => `¡Nueva versión de ${projectName} lanzada!`,
-    text: () => `🌟 ¡Las estrellas brillan sobre la cadena de bloques! ¡Felicitaciones al equipo por la sinergia ágil! 🎊`
+    text: () => `✨ ¡Una nueva clase de comerciantes surgirá como el sol naciente! 🌅`
   },
   japanese: {
     pretext: projectName => `${projectName}の新バージョンがリリースされました！`,
-    text: () => `✨ ブロックチェーンの上で星がきらめく！アジャイルシナジーを達成したチームにおめでとう！ 🌌`
+    text: () => `✨ 新しい商人の階級が昇る太陽のように現れる！ 🌅`
   },
   swedish: {
     pretext: projectName => `Ny version av ${projectName} släppt!`,
-    text: () => `⭐ Stjärnorna glittrar över blockkedjan! Grattis till teamet för den agila synergin! 🎯`
+    text: () => `✨ En ny köpmannaklasse kommer att resa sig som den uppgående solen! 🌅`
   },
   german: {
     pretext: projectName => `Neue Version von ${projectName} veröffentlicht!`,
-    text: () => `🌟 Die Sterne funkeln über der Blockchain! Glückwunsch an das Team für die agile Synergie! 🚀`
+    text: () => `✨ Eine neue Kaufmannsklasse wird wie die aufgehende Sonne aufsteigen! 🌅`
   }
 }
 
